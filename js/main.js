@@ -2,7 +2,7 @@ const svg = d3.select(".chart-1")
   .append("svg")
   .attr("viewBox", "0 0 900 600");
 
-d3.csv("../data/book_ratings.csv", d => ({
+d3.csv("data/book_ratings.csv", d => ({
   title: d.title,
   readers: +d.readers,
   rating: +d.rating,
