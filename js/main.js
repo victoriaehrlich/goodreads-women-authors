@@ -7,24 +7,24 @@ d3.csv("../data/book_ratings.csv", d => ({
   readers: +d.readers,
   rating: +d.rating,
   author: d.author,
-})).then(data => {
-    console.log(data);
+})).then(books => {
+    console.log(books);
 
-    createVis(data);
+    createVis(books); //books can be called anything you want
 });
 
-function createVis(data) {
+function createVis(books) {
     //defining my margins
   const margin = { top: 60, right: 70, bottom: 10, left: 140 };
-  const width = 900 - margin.left - margin.right;
+  const width = 900 - margin.left - margin.right; //width of the chart
   const height = 600 - margin.top - margin.bottom;
 
-  const xScale = d3.scaleLinear()
-    .domain([0, d3.max(data, d => d.readers)])
-    .range([0, width - 10 ]);
+  const xScale = d3.scaleLinear() // continuous input and a continuous output
+    .domain([0, d3.max(books, c => c.readers)]) //this is called an array function -- domain takes the input 
+    .range([0, width - 10 ]);// range takes the output 
 
-  const yScale = d3.scaleBand()
-    .domain(data.map(d => d.title))
+  const yScale = d3.scaleBand() //discrete input and a continous output looking at 0 to 900 for my height reference later 
+    .domain(books.map(d => d.title)) // .map creates a new array of titles -- see whether you can do d.title, d.author within the same array if working with multiple columns
     .range([0, height])
     .paddingInner(0.2);
 
@@ -34,7 +34,7 @@ function createVis(data) {
     .attr("transform", `translate(${margin.left},${margin.top})`);
 
   const barAndLabel = chart.selectAll("g.bar")
-    .data(data)
+    .data(books) //binding the data .data is part of d3 library
     .join("g")
     .attr("class", "bar")
     .attr("transform", d => `translate(0, ${yScale(d.title)})`);
