@@ -15,7 +15,7 @@ d3.csv("data/book_ratings.csv", d => ({
 
 function createVis(books) {
     //defining my margins
-  const margin = { top: 60, right: 70, bottom: 10, left: 140 };
+  const margin = { top: 45, right: 70, bottom: 10, left: 140 };
   const width = 900 - margin.left - margin.right; //width of the chart
   const height = 600 - margin.top - margin.bottom;
 
